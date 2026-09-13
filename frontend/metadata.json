@@ -1,0 +1,6 @@
+{
+  "name": "MediVision AI",
+  "description": "AI-Powered Medical Report & Diagnostic Image Analysis System",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

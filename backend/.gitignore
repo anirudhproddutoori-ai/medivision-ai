@@ -1,0 +1,46 @@
+# ========================================
+# MediVision AI - Backend .gitignore
+# ========================================
+
+# Python virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Uploaded medical files
+uploads/
+backend/uploads/
+backend/backend/uploads/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Node dependencies
+node_modules/
+
+# Build files
+build/
+dist/
+coverage/
+
+# Logs
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
