@@ -24,7 +24,6 @@ interface HistoryItem {
   id: string;
   type?: string;
   created_at?: string;
-
   risk_level?: string | null;
   summary?: string;
   file_name?: string;
@@ -35,6 +34,8 @@ interface ActivityData {
   name: string;
   reports: number;
 }
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export function PatientDashboard() {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export function PatientDashboard() {
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/history",
+        `${API_URL}/api/history`,
         {
           method: "GET",
           headers: {
@@ -466,8 +467,7 @@ export function PatientDashboard() {
               to="/dashboard/upload"
               className={buttonVariants({
                 variant: "outline",
-                className:
-                  "w-full justify-start h-12",
+                className: "w-full justify-start h-12",
               })}
             >
               <FileText className="mr-2 h-5 w-5 text-blue-500" />
@@ -478,8 +478,7 @@ export function PatientDashboard() {
               to="/dashboard/upload"
               className={buttonVariants({
                 variant: "outline",
-                className:
-                  "w-full justify-start h-12",
+                className: "w-full justify-start h-12",
               })}
             >
               <ImageIcon className="mr-2 h-5 w-5 text-emerald-500" />
@@ -490,8 +489,7 @@ export function PatientDashboard() {
               to="/dashboard/chat"
               className={buttonVariants({
                 variant: "outline",
-                className:
-                  "w-full justify-start h-12",
+                className: "w-full justify-start h-12",
               })}
             >
               <Activity className="mr-2 h-5 w-5 text-purple-500" />
@@ -502,8 +500,7 @@ export function PatientDashboard() {
               to="/dashboard/history"
               className={buttonVariants({
                 variant: "outline",
-                className:
-                  "w-full justify-start h-12",
+                className: "w-full justify-start h-12",
               })}
             >
               <TrendingUp className="mr-2 h-5 w-5 text-orange-500" />

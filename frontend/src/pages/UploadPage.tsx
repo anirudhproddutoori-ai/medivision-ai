@@ -13,6 +13,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export function UploadPage() {
   const [isDragging, setIsDragging] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
@@ -98,8 +100,8 @@ export function UploadPage() {
         file.name.toLowerCase().endsWith(".pdf");
 
       const endpoint = isReport
-        ? "http://127.0.0.1:8000/api/analysis/report"
-        : "http://127.0.0.1:8000/api/analysis/image";
+        ? `${API_URL}/api/analysis/report`
+        : `${API_URL}/api/analysis/image`;
 
       setProgress(30);
 

@@ -18,7 +18,7 @@ import {
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = import.meta.env.VITE_API_URL;
 
 type Message = {
   role: "user" | "assistant";
@@ -40,7 +40,6 @@ export function ChatbotPage() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
-  // Used to automatically scroll to the newest message
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -65,7 +64,6 @@ export function ChatbotPage() {
       return;
     }
 
-    // Add user's message immediately
     setMessages((prev) => [
       ...prev,
       {
@@ -108,7 +106,6 @@ export function ChatbotPage() {
         data?.response ||
         "Sorry, I couldn't generate a response.";
 
-      // Add AI response WITHOUT removing previous messages
       setMessages((prev) => [
         ...prev,
         {
@@ -321,7 +318,7 @@ export function ChatbotPage() {
 
           </form>
 
-        </div>
+        </div>s
 
       </Card>
     </div>

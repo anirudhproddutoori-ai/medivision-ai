@@ -16,7 +16,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import { toast } from "sonner";
 
-export function AuthPage({ mode = "login" }: { mode: "login" | "register" }) {
+export function AuthPage({
+  mode = "login",
+}: {
+  mode: "login" | "register";
+}) {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -37,7 +41,7 @@ export function AuthPage({ mode = "login" }: { mode: "login" | "register" }) {
         const fullName = `${firstName} ${lastName}`.trim();
 
         const response = await fetch(
-          "http://127.0.0.1:8000/api/auth/register",
+          `${import.meta.env.VITE_API_URL}/api/auth/register`,
           {
             method: "POST",
             headers: {
@@ -73,7 +77,7 @@ export function AuthPage({ mode = "login" }: { mode: "login" | "register" }) {
       loginData.append("password", password);
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/auth/login",
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
         {
           method: "POST",
           headers: {
@@ -133,6 +137,7 @@ export function AuthPage({ mode = "login" }: { mode: "login" | "register" }) {
               className="flex items-center justify-center lg:justify-start gap-2 mb-6"
             >
               <Activity className="h-6 w-6 text-primary" />
+
               <span className="font-bold text-xl tracking-tight">
                 MediVision AI
               </span>
@@ -155,7 +160,10 @@ export function AuthPage({ mode = "login" }: { mode: "login" | "register" }) {
             {mode === "register" && (
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName">First name</Label>
+                  <Label htmlFor="firstName">
+                    First name
+                  </Label>
+
                   <Input
                     id="firstName"
                     name="firstName"
@@ -165,7 +173,10 @@ export function AuthPage({ mode = "login" }: { mode: "login" | "register" }) {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="lastName">Last name</Label>
+                  <Label htmlFor="lastName">
+                    Last name
+                  </Label>
+
                   <Input
                     id="lastName"
                     name="lastName"
@@ -177,7 +188,10 @@ export function AuthPage({ mode = "login" }: { mode: "login" | "register" }) {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">
+                Email
+              </Label>
+
               <Input
                 id="email"
                 name="email"
@@ -189,7 +203,9 @@ export function AuthPage({ mode = "login" }: { mode: "login" | "register" }) {
 
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">
+                  Password
+                </Label>
 
                 {mode === "login" && (
                   <Link

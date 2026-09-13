@@ -18,6 +18,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 interface HistoryItem {
   id: string;
   file_name?: string;
@@ -67,7 +69,7 @@ export function HistoryPage() {
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/history",
+        `${API_URL}/api/history`,
         {
           method: "GET",
           headers: {
@@ -120,7 +122,9 @@ export function HistoryPage() {
         item.test_type?.toLowerCase().includes(search) ||
         item.summary?.toLowerCase().includes(search) ||
         item.risk_level?.toLowerCase().includes(search) ||
-        item.suggested_specialist?.toLowerCase().includes(search) ||
+        item.suggested_specialist
+          ?.toLowerCase()
+          .includes(search) ||
         item.doctor?.toLowerCase().includes(search) ||
         item.hospital?.toLowerCase().includes(search)
       );
@@ -142,7 +146,9 @@ export function HistoryPage() {
     try {
       setDeletingId(id);
 
-      const token = localStorage.getItem("medivision_access_token");
+      const token = localStorage.getItem(
+        "medivision_access_token"
+      );
 
       if (!token) {
         navigate("/login");
@@ -150,7 +156,7 @@ export function HistoryPage() {
       }
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/history/${id}`,
+        `${API_URL}/api/history/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -160,8 +166,12 @@ export function HistoryPage() {
       );
 
       if (response.status === 401) {
-        localStorage.removeItem("medivision_access_token");
-        localStorage.removeItem("medivision_token_type");
+        localStorage.removeItem(
+          "medivision_access_token"
+        );
+        localStorage.removeItem(
+          "medivision_token_type"
+        );
         navigate("/login");
         return;
       }
@@ -198,7 +208,9 @@ export function HistoryPage() {
   // ---------------------------------------------------------
   const handleDownload = async (id: string) => {
     try {
-      const token = localStorage.getItem("medivision_access_token");
+      const token = localStorage.getItem(
+        "medivision_access_token"
+      );
 
       if (!token) {
         navigate("/login");
@@ -206,7 +218,7 @@ export function HistoryPage() {
       }
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/history/${id}/download`,
+        `${API_URL}/api/history/${id}/download`,
         {
           method: "GET",
           headers: {
@@ -216,8 +228,12 @@ export function HistoryPage() {
       );
 
       if (response.status === 401) {
-        localStorage.removeItem("medivision_access_token");
-        localStorage.removeItem("medivision_token_type");
+        localStorage.removeItem(
+          "medivision_access_token"
+        );
+        localStorage.removeItem(
+          "medivision_token_type"
+        );
         navigate("/login");
         return;
       }
@@ -230,7 +246,7 @@ export function HistoryPage() {
 
       if (data.download_url) {
         window.open(
-          `http://127.0.0.1:8000${data.download_url}`,
+          `${API_URL}${data.download_url}`,
           "_blank"
         );
       }
@@ -270,7 +286,12 @@ export function HistoryPage() {
     const value = risk?.toLowerCase();
 
     if (value === "high") return "destructive";
-    if (value === "moderate" || value === "medium") return "secondary";
+    if (
+      value === "moderate" ||
+      value === "medium"
+    ) {
+      return "secondary";
+    }
     if (value === "low") return "default";
 
     return "outline";
@@ -444,6 +465,7 @@ export function HistoryPage() {
                         </Badge>
                       )}
                     </div>
+
                   </div>
 
                   {/* File name */}
@@ -512,6 +534,7 @@ export function HistoryPage() {
                         {item.suggested_specialist}
                       </p>
                     )}
+
                   </div>
 
                   {/* Findings */}
